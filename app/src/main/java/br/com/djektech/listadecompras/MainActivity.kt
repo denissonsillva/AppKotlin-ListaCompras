@@ -2,6 +2,8 @@ package br.com.djektech.listadecompras
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,7 +20,27 @@ class MainActivity : AppCompatActivity() {
 
         btn_inserir.setOnClickListener {
             val produto = ed_txt_produto.text.toString()
-            produtosAdapter.add(produto)
+
+            if(produto.isNotEmpty()){
+                //enviando produto para a lista
+                produtosAdapter.add(produto)
+                //limpando acaixa de texto
+                ed_txt_produto.text.clear()
+            }else{
+                ed_txt_produto.error = "Digite um produto"
+            }
+
+        }
+
+        //excluindo um itens da lista
+        list_view_produtos.setOnItemClickListener{
+            adapterView:AdapterView<*>, view:View, position:Int, id:Long ->
+            //buscando o item clicado
+            val item = produtosAdapter.getItem(position)
+            //removendo o item clicado
+            produtosAdapter.remove(item)
+            //retorno indicando o sucesso do clique
+            true
         }
     }
 }
