@@ -42,7 +42,7 @@ class ProdutoAdapter(contexto: Context) : ArrayAdapter<Produto>(contexto,0) {
         txt_valor.text = f.format(item?.valor)
 
         if (item?.foto != null){
-            img_produto.setImageBitmap(item?.foto)
+            img_produto.setImageBitmap(item.foto)
         }
 
         return v
