@@ -9,19 +9,22 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ed_txt_produto"
-        android:hint="Nome do produto">
-    </EditText>
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="inserir"
-        android:id="@+id/btn_inserir">
+        android:text="Adicionar itens"
+        android:id="@+id/btn_adicionar">
     </Button>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOTAL: 300,00"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:id="@+id/txt_total">
+    </TextView>
 
     <ListView
         android:layout_width="match_parent"

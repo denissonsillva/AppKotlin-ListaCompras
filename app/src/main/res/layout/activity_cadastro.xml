@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.djektech.listadecompras.CadastroActivity"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar produto"
+        android:textStyle="bold"
+        android:textSize="21sp"
+        android:layout_marginBottom="15dp" />
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@android:drawable/ic_menu_camera"
+        android:id="@+id/img_foto_produto"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <EditText
+        android:id="@+id/ed_txt_produto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome do produto"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/ed_txt_qtd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quantidade"
+        android:inputType="number"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/ed_txt_valor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="R$ 0.00"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="inserir"
+        android:id="@+id/btn_inserir"
+        />
+
+</LinearLayout>

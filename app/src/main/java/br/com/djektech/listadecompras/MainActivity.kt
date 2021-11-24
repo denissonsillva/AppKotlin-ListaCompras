@@ -1,10 +1,12 @@
 package br.com.djektech.listadecompras
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import kotlinx.android.synthetic.main.activity_cadastro.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,17 +20,11 @@ class MainActivity : AppCompatActivity() {
         //definindo o adaptador da lista
         list_view_produtos.adapter = produtosAdapter
 
-        btn_inserir.setOnClickListener {
-            val produto = ed_txt_produto.text.toString()
-
-            if(produto.isNotEmpty()){
-                //enviando produto para a lista
-                produtosAdapter.add(produto)
-                //limpando acaixa de texto
-                ed_txt_produto.text.clear()
-            }else{
-                ed_txt_produto.error = "Digite um produto"
-            }
+        btn_adicionar.setOnClickListener {
+            //Criando a Intent explícita
+            val intent = Intent(this, CadastroActivity::class.java)
+            //iniciando a atividade
+            startActivity(intent)
 
         }
 

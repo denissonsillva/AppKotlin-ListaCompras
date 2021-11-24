@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android-Kotlin/Estudo/Aplicativos/ListaCompras/app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
+        <entry key="..\:/Android-Kotlin/Estudo/Aplicativos/ListaCompras/app/src/main/res/layout/activity_cadastro.xml" value="0.22" />
+        <entry key="..\:/Android-Kotlin/Estudo/Aplicativos/ListaCompras/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Android-Kotlin/Estudo/Aplicativos/ListaCompras/app/src/main/res/layout/list_view_item.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
