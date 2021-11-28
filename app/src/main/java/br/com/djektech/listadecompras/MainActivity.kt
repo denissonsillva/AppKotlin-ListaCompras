@@ -1,6 +1,5 @@
 package br.com.djektech.listadecompras
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -12,7 +11,6 @@ import org.jetbrains.anko.db.rowParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
-import java.nio.file.Files.delete
 import java.text.NumberFormat
 import java.util.*
 
@@ -64,6 +62,8 @@ class MainActivity : AppCompatActivity() {
         database.use {
             delete("produtos", "id = {id}", "id" to idProduto)
         }
+        //atualizando a soma na Main Activity após remoção de produto
+        onResume()
     }
 
     override fun onResume() {
@@ -97,7 +97,6 @@ class MainActivity : AppCompatActivity() {
                 //formatando em formato moeda
                 val f = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
                 txt_total.text = "TOTAL: ${f.format(soma)}"
-
             }
         }
     }
