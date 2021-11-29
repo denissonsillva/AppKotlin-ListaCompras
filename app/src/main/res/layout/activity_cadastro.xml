@@ -26,27 +26,28 @@
         />
 
     <EditText
-        android:id="@+id/ed_txt_produto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/txt_produto"
         android:hint="Nome do produto"
-        android:minHeight="48dp" />
+        />
 
     <EditText
-        android:id="@+id/ed_txt_qtd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Quantidade"
+        android:id="@+id/txt_qtd"
         android:inputType="number"
-        android:minHeight="48dp" />
+        android:hint="Quantidade"
+        />
 
     <EditText
-        android:id="@+id/ed_txt_valor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="R$ 0.00"
+        android:id="@+id/txt_valor"
         android:inputType="numberDecimal"
-        android:minHeight="48dp" />
+        android:hint="R$ 0.00"
+        />
+
 
     <Button
         android:layout_width="match_parent"

@@ -6,27 +6,28 @@ import org.jetbrains.anko.db.*
 
 // Acesso a propriedade pelo contexto
 val Context.database: ListaComprasDatabase
-    get() = ListaComprasDatabase.getInstance(applicationContext)
+    get() = ListaComprasDatabase.getInstance(getApplicationContext())
 
-class ListaComprasDatabase(context: Context) : ManagedSQLiteOpenHelper(ctx = context , name = "listaCompras.db",  version = 1) {
+
+class ListaComprasDatabase(context: Context) : ManagedSQLiteOpenHelper(ctx = context , name = "listaCompras.db",  version= 1) {
 
     //singleton da classe
-    companion object{
+    companion object {
         private var instance: ListaComprasDatabase? = null
 
         @Synchronized
-        fun getInstance(ctx:Context): ListaComprasDatabase{
-            if (instance == null){
-                instance = ListaComprasDatabase(ctx.applicationContext)
+        fun getInstance(ctx: Context): ListaComprasDatabase {
+            if (instance == null) {
+                instance = ListaComprasDatabase(ctx.getApplicationContext())
             }
             return instance!!
         }
     }
 
-    override fun onCreate(db: SQLiteDatabase?) {
+    override fun onCreate(db: SQLiteDatabase) {
+        // Criação de tabelas
 
-        //criação de tabelas
-        db?.createTable("produtos", true,
+        db.createTable("produtos", true,
             "id" to INTEGER + PRIMARY_KEY + UNIQUE,
             "nome" to TEXT,
             "quantidade" to INTEGER,
@@ -35,8 +36,8 @@ class ListaComprasDatabase(context: Context) : ManagedSQLiteOpenHelper(ctx = con
         )
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        // Atualização do banco de dados
     }
 }
 

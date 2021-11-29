@@ -15,12 +15,12 @@ class ProdutoAdapter(contexto: Context) : ArrayAdapter<Produto>(contexto,0) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
-        val v: View
+        val v:View
 
-        if (convertView != null) {
+        if(convertView != null){
             v = convertView
-        } else {
-            Log.d("parent", parent?.toString())
+        }else{
+            parent.toString().let { Log.d("parent", it) }
             v = LayoutInflater.from(context).inflate(R.layout.list_view_item, parent, false)
         }
 
@@ -33,7 +33,6 @@ class ProdutoAdapter(contexto: Context) : ArrayAdapter<Produto>(contexto,0) {
 
         txt_qtd.text = item?.quantidade.toString()
         txt_produto.text = item?.nome
-        //txt_valor.text = item?.valor.toString()
 
         //obtendo a instancia do objeto de formatação
         val f = NumberFormat.getCurrencyInstance(Locale("pt", "br"))

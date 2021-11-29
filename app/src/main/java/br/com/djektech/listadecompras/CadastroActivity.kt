@@ -12,53 +12,59 @@ import org.jetbrains.anko.toast
 
 class CadastroActivity : AppCompatActivity() {
 
-    val COD_IMAGE = 101
+    val COD_IMAGE = 201
     var imageBitMap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
 
-        //ação do botão INSERIR
+
+        //definição do ouvinte do botão
         btn_inserir.setOnClickListener {
 
-            //pegando os valores digitados pelo usuário
-            val produto = ed_txt_produto.text.toString()
-            val qtd = ed_txt_qtd.text.toString()
-            val valor = ed_txt_valor.text.toString()
+            //pegando o valor digitado pelo usuario
+            val produto = txt_produto.text.toString()
+            val qtd = txt_qtd.text.toString()
+            val valor = txt_valor.text.toString()
 
-            if (produto.isNotEmpty() && qtd.isNotEmpty()  && valor.isNotEmpty())  {
 
-                //enviado o item para a lista
+            //verificando se o usuario digitou algum valor
+            if (produto.isNotEmpty() && qtd.isNotEmpty()  && valor.isNotEmpty()) {
+
                 database.use{
 
                     val idProduto = insert("Produtos",
                         "nome" to produto,
                         "quantidade" to qtd,
                         "valor" to valor.toDouble(),
-                        "foto" to imageBitMap?.toByteArray() // acrescida a chamada à função de extensão
+                        "foto" to imageBitMap?.toByteArray()
                     )
+
                     if(idProduto != -1L){
-                        toast("Item inserido com sucesso!")
-                        //limpando os campos
-                        ed_txt_produto.text.clear()
-                        ed_txt_qtd.text.clear()
-                        ed_txt_valor.text.clear()
-                        //img_foto_produto.setImageResource(R.drawable.img_foto_camera) //(verificar...)
+
+                        toast("Item inserido com sucesso")
+
+                        txt_produto.text.clear()
+                        txt_qtd.text.clear()
+                        txt_valor.text.clear()
+
                     }else{
-                        toast("Erro ao inserir no banco de dados!")
+                        toast("Erro ao inserir no banco de dados")
                     }
                 }
 
-
             }else{
-                ed_txt_produto.error = if (ed_txt_produto.text.isEmpty()) "Digite o nome do produto" else null
-                ed_txt_qtd.error = if (ed_txt_qtd.text.isEmpty()) "Preencha a quantidade" else null
-                ed_txt_valor.error = if (ed_txt_valor.text.isEmpty()) "Preencha o valor" else null
+
+                txt_produto.error = if (txt_produto.text.isEmpty()) "Preencha o nome do produto" else null
+                txt_qtd.error = if (txt_qtd.text.isEmpty()) "Preencha a quantidade" else null
+                txt_valor.error = if (txt_valor.text.isEmpty()) "Preencha o valor" else null
             }
         }
 
+
         img_foto_produto.setOnClickListener {
+
             abrirGaleria()
         }
     }
@@ -68,8 +74,8 @@ class CadastroActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem"), COD_IMAGE)
-
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -77,13 +83,10 @@ class CadastroActivity : AppCompatActivity() {
         if (requestCode == COD_IMAGE && resultCode == Activity.RESULT_OK) {
 
             if (data != null) {
-                //lendo a uri com a imagem
-                val inputStream = data.getData()?.let { contentResolver.openInputStream(it) };
+                val inputStream = data.getData()?.let {contentResolver.openInputStream(it)}
 
-                //transformando o resultado em bitmap
                 imageBitMap = BitmapFactory.decodeStream(inputStream)
 
-                //Exibir a imagem no aplicativo
                 img_foto_produto.setImageBitmap(imageBitMap)
             }
         }
