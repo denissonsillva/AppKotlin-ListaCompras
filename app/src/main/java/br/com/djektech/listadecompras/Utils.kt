@@ -10,11 +10,8 @@ val produtosGlobal = mutableListOf<Produto>()
 
 //funcão de extensão para formatar números Double no formato moeda
 fun Double.moeda(): String{
-
     val f = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
-
     return f.format(this)
-
 }
 
 //transforma Bitmap em ByteArray

@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.parseList
 import org.jetbrains.anko.db.rowParser
 import org.jetbrains.anko.db.select
+import org.jetbrains.anko.selector
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.text.NumberFormat
@@ -19,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val produtosAdapter2 = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+
         //implementação do adaptador
         val produtosAdapter = ProdutoAdapter(this)
 
@@ -26,21 +31,36 @@ class MainActivity : AppCompatActivity() {
         list_view_produtos.adapter = produtosAdapter
 
         //excluindo um itens da lista
-        list_view_produtos.setOnItemLongClickListener{
+        list_view_produtos.setOnItemLongClickListener{ adapterView: AdapterView<*>, view: View, position: Int, l: Long ->
 
-            adapterView:AdapterView<*>, view:View, position:Int, id:Long ->
+            //atualizando registro
+            val opcoes = listOf("editar", "excluir")
 
-            //buscando o item clicado
-            val item = produtosAdapter.getItem(position)
+            val opc_editar = 0
+            val opc_excluir = 1
 
-            //removendo o item clicado
-            produtosAdapter.remove(item)
+            selector("O que deseja fazer", opcoes) { dialogInterface, position ->
+                when (position) {
+                    opc_editar -> {
+                        alert("Editar").show()
+                        //toast("Editar")
+                    }
 
-            //deletando do banco de dados
-            item?.id?.let { deletarProduto(it) }
-            toast("Item deletado com sucesso!")
+                    opc_excluir -> {
+                        //buscando o item clicado
+                        val item = produtosAdapter.getItem(position)
 
-            //retorno indicando o sucesso do clique
+                        //removendo o item da lista
+                        produtosAdapter.remove(item)
+
+                        //deletando do banco de dados
+                        item?.let { deletarProduto(it.id) }
+
+                        toast("Idem deletado com sucesso!")
+                    }
+                }
+            }
+
             true
         }
 

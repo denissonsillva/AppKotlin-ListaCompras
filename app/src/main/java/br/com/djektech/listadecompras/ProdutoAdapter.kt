@@ -20,7 +20,7 @@ class ProdutoAdapter(contexto: Context) : ArrayAdapter<Produto>(contexto,0) {
         if (convertView != null) {
             v = convertView
         } else {
-            Log.d("parent", parent.toString())
+            Log.d("parent", parent?.toString())
             v = LayoutInflater.from(context).inflate(R.layout.list_view_item, parent, false)
         }
 
@@ -33,7 +33,7 @@ class ProdutoAdapter(contexto: Context) : ArrayAdapter<Produto>(contexto,0) {
 
         txt_qtd.text = item?.quantidade.toString()
         txt_produto.text = item?.nome
-        txt_valor.text = item?.valor.toString()
+        //txt_valor.text = item?.valor.toString()
 
         //obtendo a instancia do objeto de formatação
         val f = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
