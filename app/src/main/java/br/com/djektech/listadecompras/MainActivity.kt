@@ -26,68 +26,38 @@ class MainActivity : AppCompatActivity() {
         list_view_produtos.adapter = adapter
 
         list_view_produtos.setOnItemClickListener{
-                adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
+                adapterView: AdapterView<*>, view1: View, posicao: Int, l: Long ->
 
-            alert("Mensagem", "Titulo"){
+            alert("Deseja excluir esse item da lista?", "EXCLUIR ITEM"){
                 //Botão de OK
                 yesButton {
                     //Ação caso escolheu a opção SIM
+
+                    //buscando o item clicado
+                    val item = adapter.getItem(posicao)
+
+                    //removendo o item clicado da lista
+                    adapter.remove(item)
+
+                    //deletando do banco de dados
+                    item?.let { deletarProduto(it.id) }
+
+                    toast("Item deletado com sucesso!")
                 }
 
                 //Botão de calcel
                 noButton {
-                    //Ação caso escolheu a opção NAO
+                    //Ação caso escolheu a opção NAO: fecha a caixa alert
                 }
 
             }.show()
         }
 
 
-        //definição do ouvinte da lista para clicks longos
-        list_view_produtos.setOnItemLongClickListener{ adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-
-
-            //atualizando registros
-
-            val opcoes = listOf("editar", "excluir")
-
-            val opc_editar = 0
-            val opc_excluir = 1
-
-            selector("O que deseja fazer?", opcoes) { dialogInterface, position ->
-
-                when (position) {
-
-                    opc_editar -> {
-
-                        alert("Editar").show()
-                        //toast("Editar")
-                    }
-
-                    opc_excluir -> {
-
-                        //buscando o item clicado
-                        val item = adapter.getItem(i)
-
-                        //removendo o item clicado da lista
-                        adapter.remove(item)
-
-                        //deletando do banco de dados
-                        item?.let { deletarProduto(it.id) }
-
-                        toast("item deletado com sucesso")
-                    }
-                }
-            }
-            true
-        }
-
-
         btn_adicionar.setOnClickListener {
             startActivity<CadastroActivity>()
-            //val intent = Intent(this, CadastroActivity::class.java)
-            //startActivity(intent)
         }
+
     }
 
 
